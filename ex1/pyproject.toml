@@ -1,0 +1,20 @@
+[project]
+name = "loading_programs"
+version = "0.1.0"
+description = "\"A project that demonstrates mastery of package management both pip and Poetry and building data analysis tool that requires external libraries.\""
+authors = [
+    {name = "ecakiray",email = "eraycakiray@gmail.com"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas==2.1.0",
+    "numpy==1.25.0",
+    "matplotlib==3.7.2"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
