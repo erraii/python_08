@@ -11,7 +11,9 @@ REQUIRED_VARIABLES = [
     "ZION_ENDPOINT",
 ]
 
-
+def is_valid_mode(mode: str | None) -> bool:
+    return mode in ("development", "production")
+    
 def print_security_check() -> None:
     print("\nEnvironment security check:")
     print("[OK] All variables set")
@@ -75,6 +77,10 @@ def main() -> None:
     missing = validate_config(config)
     if missing:
         print_missing_config(missing)
+        sys.exit(1)
+    if not is_valid_mode(config["MATRIX_MODE"]):
+        print("Configuration error:")
+        print("[INVALID] MATRIX_MODE must be 'development' or 'production'")
         sys.exit(1)
     print_config(config)
     print_security_check()
