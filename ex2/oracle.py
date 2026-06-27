@@ -12,18 +12,13 @@ REQUIRED_VARIABLES = [
 ]
 
 
-def print_security_check(missing: list[str]) -> None:
+def print_security_check() -> None:
     print("\nEnvironment security check:")
-
-    if missing:
-        print_missing_config(missing)
-        sys.exit(1)
-    else:
-        print("[OK] All variables set")
-        print("[OK] No hardcoded secrets detected")
-        print("[OK] Production overrides available")
-        print()
-        print("The Oracle sees all configurations.")
+    print("[OK] All variables set")
+    print("[OK] No hardcoded secrets detected")
+    print("[OK] Production overrides available")
+    print()
+    print("The Oracle sees all configurations.")
 
 
 def load_config() -> dict[str, str | None]:
@@ -77,9 +72,12 @@ def main() -> None:
     print("\nORACLE STATUS: Reading the Matrix...\n")
     # os.environ["API_KEY"] = "supersecret"
     config = load_config()
-    print_config(config)
     missing = validate_config(config)
-    print_security_check(missing)
+    if missing:
+        print_missing_config(missing)
+        sys.exit(1)
+    print_config(config)
+    print_security_check()
 
 
 if __name__ == "__main__":
