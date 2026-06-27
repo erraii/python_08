@@ -145,7 +145,7 @@ def check_requirements() -> None:
             continue
 
         # Check if installed version satisfies the specifier
-        if installed_version not in req_version:
+        if installed_version != req_version:
             missing.append({
                 "package": package_name,
                 "required": str(req_version),
